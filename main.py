@@ -48,24 +48,6 @@ class Upload (db.Model):
     file_name = db.Column(db.String, nullable=False)
     file_size = db.Column(db.Float)
 
-@app.route('/', methods=['GET','POST'])
-def uploading():
-    if request.method == 'POST':
-        file = request.files['file']
-        if file.filename == '':
-            return redirect(request.url)
-        filename = secure_filename(file.filename)
-        file.save(os.path.join(Destination_Folder,filename))
-        file_size = round(os.stat(os.path.join(Destination_Folder,filename)).st_size/1048.576,2)
-        db.session.add(Upload(file_name=filename, file_size=file_size))
-        db.session.commit()
-        return redirect(url_for('history'))
-    return render_template('index.html')
-
-@app.route('/history')
-def history():
-    return render_template('list.html', my_files = Upload.query.all())
-
 @app.route('/download')
 def download():
     return redirect(url_for('give_files', relpath=Destination_Folder))
