@@ -17,7 +17,10 @@ const FileDownloaderSection = () => {
 
     //runs on the first to set to shared folder base directory; after that to set it to prev
     React.useEffect(()=>{
-        axios.get('http://192.168.1.18:8080/download')
+        const addr_ip = window.location.hostname
+        const addr_port = '8080'
+        const addr_com = addr_ip + ':' + addr_port
+        axios.get(`http://${addr_com}/download`)
             .then((res)=> {
                 setIsLoading(false)
                 setFileLists((prev)=>{

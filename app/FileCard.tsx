@@ -22,6 +22,9 @@ const FileCard = ({fofile, setFileLists,setHoldPrev}: Props) => {
     const filename = fofile.filename
     const filepathsplit = filename.split('.')
     const filepath = fofile.filepath
+    const addr_ip = window.location.hostname
+    const addr_port = '8080'
+    const addr_com = addr_ip + ':' + addr_port
     const[isLoading, setIsLoading] = React.useState(false)
     const[isError, setIsError] = React.useState(false)
     //run after every card click
@@ -30,13 +33,13 @@ const FileCard = ({fofile, setFileLists,setHoldPrev}: Props) => {
         if(!(fofile.isfolder)){
             setIsLoading(false)
             const tempLink = document.createElement('a')
-            tempLink.href = `http://192.168.1.18:8080/downloadfiles/${filepath}`
+            tempLink.href = `http://${addr_com}/downloadfiles/${filepath}`
             tempLink.download = filename
             document.body.appendChild(tempLink)
             tempLink.click()
             document.body.removeChild(tempLink)
         }else{
-            axios.get(`http://192.168.1.18:8080/downloadfiles/${filepath}`)
+            axios.get(`http://${addr_com}/downloadfiles/${filepath}`)
             .then((res)=>{
                 if (res.status === 200){
                     console.log(res)

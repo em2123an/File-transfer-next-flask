@@ -10,7 +10,9 @@ const FileUploaderSection = () => {
     const [progress, setProgress] = React.useState(0)
     const [isStarting, setIsStarting] = React.useState(false)
     const [isError, setIsError] = React.useState(false)
-
+    const addr_ip = window.location.hostname
+    const addr_port = '8080'
+    const addr_com = addr_ip + ':' + addr_port
     function handleOnSubmit(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault()
         if(!(fileInput.current?.files?.length)){
@@ -38,7 +40,7 @@ const FileUploaderSection = () => {
             myFormData.append('chunk_data', chunkData)
             myFormData.append('chunk_offset', start.toString())
             myFormData.append('chunk_no', (chunkSent+1).toString())
-            axios.post('http://192.168.1.18:8080/download_from_react',myFormData,{
+            axios.post(`http://${addr_com}/download_from_react`,myFormData,{
             })
                 .then((res)=> {
                     if(res.status === 200)
