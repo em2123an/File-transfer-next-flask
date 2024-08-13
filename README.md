@@ -3,7 +3,7 @@
 ## How to Run
   ### First, run in development
   #### 
-      npm run dev 
+      npm run dev -H 0.0.0.0 -p 3000
   ####
       yarn dev 
   ### Second, Open [http://localhost:3000](http://localhost:3000) with your browser
