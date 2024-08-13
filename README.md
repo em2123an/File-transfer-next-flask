@@ -9,4 +9,4 @@
   #### 
       npm run dev -H 0.0.0.0 -p 3000
   ### Second, run 'main.py' to run the flask (for the API)
-  ### Third, Open [http://localhost:3000](http://localhost:3000) with your browser
+  ### Third, Open http://primary_host_ip:3000 with your browser
